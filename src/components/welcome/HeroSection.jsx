@@ -1,8 +1,11 @@
 import React from 'react';
 import { MapPin, Search, PlusCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+  
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
       {/* Imagem de Fundo */}
@@ -35,10 +38,10 @@ const HeroSection = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 transition-all px-8 py-4 rounded-xl font-semibold">
+          <button onClick={() => navigate('/explore-imoveis')} className="cursor-pointer flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 transition-all px-8 py-4 rounded-xl font-semibold">
             <Search size={20} /> Explorar Imóveis
           </button>
-          <button className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 transition-all px-8 py-4 rounded-xl font-semibold backdrop-blur-sm">
+          <button className="cursor-pointer flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 transition-all px-8 py-4 rounded-xl font-semibold backdrop-blur-sm">
             <PlusCircle size={20} /> Publicar Imóvel
           </button>
         </div>
