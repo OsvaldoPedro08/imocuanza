@@ -3,7 +3,7 @@ import { MapPin, Building, ShieldCheck, Handshake } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const highlights = [
-  { icon: MapPin, title: "14 Municípios", desc: "do Cuanza Norte" },
+  { icon: MapPin, title: "18 Municípios", desc: "do Cuanza Norte" },
   { icon: Building, title: "Venda & Arrendamento", desc: "diversos tipos" },
   { icon: ShieldCheck, title: "Perfis Verificados", desc: "dados reais" },
   { icon: Handshake, title: "Contacto Seguro", desc: "com transparência" },
