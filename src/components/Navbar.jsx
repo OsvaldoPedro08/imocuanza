@@ -40,7 +40,7 @@ const Navbar = () => {
               {item.name}
             </Link>
           ))}
-          <button className="ml-2 bg-emerald-700 text-white px-4 py-2 rounded-lg hover:bg-emerald-800 transition">
+          <button className="cursor-pointer ml-2 text-emerald-800 px-4 py-2 rounded-lg hover:bg-gray-100 transition">
             Perfil
           </button>
         </div>

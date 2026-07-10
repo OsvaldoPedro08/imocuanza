@@ -1,33 +1,48 @@
 import React, { useState, useMemo } from 'react';
 import Navbar from '../components/Navbar';
 import { MapPin, Bed, Bath, Square, Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ExplorePage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filters, setFilters] = useState({
-    transacao: "Todas (Venda/Arrendamento)",
-    tipo: "Todos os tipos",
-    municipio: "Todos os municípios"
-  });
+    const navigate = useNavigate();
 
-  // Dados dos imóveis
-  const properties = [
-    { id: 1, title: "Casa T3 com quintal no Bairro Popular", price: "8 500 000", type: "Venda", category: "Casa", location: "Cazengo, Bairro Popular", beds: 3, baths: 2, area: "180m²", image: "/03.JPG" },
-    { id: 2, title: "Casa T3 com quintal, no Bairro Sambizanga", price: "125 000", type: "Arrendamento", category: "Casa", location: "Cazengo, Sambizanga", beds: 3, baths: 1, area: "85m²", image: "/04.JPG" },
-    { id: 3, title: "Apartamento T2 mobilado no centro", price: "120 000", type: "Arrendamento", category: "Apartamento", location: "Cambambe, Alto Dondo", beds: 2, baths: 1, area: "185m²", image: "/05.JPG" }
-  ];
-
-  // Filtro Dinâmico Simples
-  const filteredProperties = useMemo(() => {
-    return properties.filter(p => {
-      const matchesSearch = p.title.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesTransacao = filters.transacao === "Todas (Venda/Arrendamento)" || p.type === filters.transacao;
-      const matchesTipo = filters.tipo === "Todos os tipos" || p.category === filters.tipo;
-      const matchesMunicipio = filters.municipio === "Todos os municípios" || p.location.includes(filters.municipio);
-      
-      return matchesSearch && matchesTransacao && matchesTipo && matchesMunicipio;
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filters, setFilters] = useState({
+        transacao: "Todas (Venda/Arrendamento)",
+        tipo: "Todos os tipos",
+        municipio: "Todos os municípios"
     });
-  }, [searchTerm, filters]);
+
+    // Dados dos imóveis
+    const properties = [
+        { id: 1, title: "Casa T3 com quintal no Bairro Popular", price: "8 500 000", type: "Venda",
+            category: "Casa", location: "Cazengo, Bairro Popular", beds: 3, baths: 2, area: "180m²",
+            image: "/03.JPG", description: "Ampla casa de 3 divisões, com sala ampla, cozinha equipada, dois wc e quintal espaçoso. Ideal para famílias. Boa localização, perto de uma esquadra policial e lojas."
+        },
+        { id: 2, title: "Casa T3 com quintal, no Bairro Sambizanga", price: "125 000", type: "Arrendamento",
+            category: "Casa", location: "Cazengo, Sambizanga", beds: 3, baths: 1, area: "85m²",
+            image: "/04.JPG", description: ""
+        },
+        { id: 3, title: "Apartamento T2 mobilado no centro", price: "120 000", type: "Arrendamento",
+            category: "Apartamento", location: "Cambambe, Alto Dondo", beds: 2, baths: 1, area: "185m²",
+            image: "/05.JPG", description: ""
+        }
+    ];
+
+    // Filtro Dinâmico Simples
+    const filteredProperties = useMemo(() => {
+        return properties.filter(p => {
+        const matchesSearch = p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                p.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                p.price.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                p.location.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesTransacao = filters.transacao === "Todas (Venda/Arrendamento)" || p.type === filters.transacao;
+        const matchesTipo = filters.tipo === "Todos os tipos" || p.category === filters.tipo;
+        const matchesMunicipio = filters.municipio === "Todos os municípios" || p.location.includes(filters.municipio);
+        
+        return matchesSearch && matchesTransacao && matchesTipo && matchesMunicipio;
+        });
+    }, [searchTerm, filters]);
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -45,7 +60,7 @@ const ExplorePage = () => {
                 <Search className="absolute left-4 top-4 text-gray-400" size={24} />
                 <input 
                     type="text" 
-                    placeholder="Pesquisar por..." 
+                    placeholder="Pesquisar por tipo, preço, categoria, localidade..." 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="w-full pl-14 pr-4 py-4 bg-gray-50 rounded-2xl outline-none text-lg"
@@ -79,11 +94,16 @@ const ExplorePage = () => {
         {/* Lista de Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                   {filteredProperties.map(p => (
-                    <div key={p.id} className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div 
+                        key={p.id} 
+                        className="cursor-pointer bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300"
+                        onClick={() => navigate('detalhes-imovel', { state: { imovel : p }})}
+                    >
                       <div className="relative h-56 w-full bg-gray-200">
                         <img src={p.image} alt={p.title} className='w-full h-full object-cover transition-transform duration-500 hover:scale-105' />
                         <div className="absolute top-4 left-4 flex gap-2">
-                          <span className="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-bold">{p.type}</span>
+                            {p.type === 'Venda' ? <span className="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-bold">{p.type}</span>
+                            : <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">{p.type}</span>}
                           <span className="bg-white/90 text-gray-800 px-3 py-1 rounded-full text-xs font-bold">{p.category}</span>
                         </div>
                       </div>
@@ -93,10 +113,10 @@ const ExplorePage = () => {
                         <div className="flex items-center gap-2 text-gray-500 text-sm mb-6">
                           <MapPin size={18} /> {p.location}
                         </div>
-                        <div className="flex gap-6 text-gray-600 border-t pt-5">
-                          <span className="flex items-center gap-2"><Bed size={20} /> {p.beds}</span>
-                          <span className="flex items-center gap-2"><Bath size={20} /> {p.baths}</span>
-                          <span className="flex items-center gap-2"><Square size={20} /> {p.area}</span>
+                        <div className="flex gap-6 text-gray-600 border-t pt-4">
+                          <span className="flex items-center gap-2"><Bed size={20} /> {p.beds} quartos</span>
+                          <span className="flex items-center gap-2"><Bath size={20} /> {p.baths} wc</span>
+                          <span className="flex items-center gap-2"><Square size={20} /> {p.area} área</span>
                         </div>
                       </div>
                     </div>
