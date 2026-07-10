@@ -12,14 +12,12 @@ const ViewImovelPage = () => {
   const imovel = location.state?.imovel;
 
   // Estado para controlar a imagem principal e a interação
-  const [mainImage, setMainImage] = useState("/03.JPG"); //imagem principal 
+  const [mainImage, setMainImage] = useState(imovel.image); //imagem principal 
   const [showInterestForm, setShowInterestForm] = useState(false);
   const [interestSent, setInterestSent] = useState(false);
   const [message, setMessage] = useState("");
 
   if(!imovel) return <div>Imóvel não encontrado.</div>
-
-  const images = ["/03.JPG", "/04.JPG", "/05.JPG"]; // Lista de imagens
 
   return (
     <main className="min-h-screen bg-gray-50 pb-20">
@@ -38,7 +36,7 @@ const ViewImovelPage = () => {
         <div className="bg-white rounded-3xl p-2 shadow-sm mb-6">
           <img src={mainImage} className="w-full h-80 object-cover rounded-2xl mb-4" />
           <div className="flex gap-4">
-            {images.map((img, i) => (
+            {imovel.images.map((img, i) => (
               <img 
                 key={i} src={img} 
                 onClick={() => setMainImage(img)}
@@ -67,10 +65,14 @@ const ViewImovelPage = () => {
               <Banknote size={18} />{imovel.price} kz
             </div>
 
-            <div className='flex gap-4 mb-6 font-bold text-gray-600 pl-2'>
-                <span>{imovel.beds} quartos</span>
-                <span>{imovel.baths} wc</span>
-                <span>{imovel.area} área</span>
+            <div className='flex gap-2 mb-6 font-bold text-gray-600 pl-2'>
+              {imovel.beds != '' && imovel.baths != '' && (
+                <div className='flex gap-2'>
+                  <span>{imovel.beds} quartos</span>
+                  <span>{imovel.baths} wc</span>
+                </div>
+              )}
+              <span>{imovel.area} área</span>
             </div>
 
             <hr className='text-center text-gray-300 mt-4 mb-4' />

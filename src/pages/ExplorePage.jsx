@@ -17,15 +17,33 @@ const ExplorePage = () => {
     const properties = [
         { id: 1, title: "Casa T3 com quintal no Bairro Popular", price: "8 500 000", type: "Venda",
             category: "Casa", location: "Cazengo, Bairro Popular", beds: 3, baths: 2, area: "180m²",
-            image: "/03.JPG", description: "Ampla casa de 3 divisões, com sala ampla, cozinha equipada, dois wc e quintal espaçoso. Ideal para famílias. Boa localização, perto de uma esquadra policial e lojas."
+            image: "/id01_00.JPG", description: "Ampla casa de 3 divisões, com sala ampla, cozinha equipada, dois wc e quintal espaçoso. Ideal para famílias. Boa localização, perto de uma esquadra policial e lojas.",
+            images : ["/id01_00.JPG", "/id01_01.JPG", "/id01_02.JPG", "/id01_03.JPG"]
         },
         { id: 2, title: "Casa T3 com quintal, no Bairro Sambizanga", price: "125 000", type: "Arrendamento",
             category: "Casa", location: "Cazengo, Sambizanga", beds: 3, baths: 1, area: "85m²",
-            image: "/04.JPG", description: ""
+            image: "/id02_00.JPG", description: "",
+            images: ["/id02_00.JPG", "/id02_01.JPG", "/id02_02.JPG", "/id02_03.JPG"]
         },
         { id: 3, title: "Apartamento T2 mobilado no centro", price: "120 000", type: "Arrendamento",
             category: "Apartamento", location: "Cambambe, Alto Dondo", beds: 2, baths: 1, area: "185m²",
-            image: "/05.JPG", description: ""
+            image: "/id03_00.JPG", description: "",
+            images: ["/id03_00.JPG", "/id03_01.WEBP", "/id03_02.WEBP", "/id03_03.WEBP"]
+        },
+        { id: 4, title: "Terreno no Bairro Marica", price: "1 500 000", type: "Venda",
+            category: "Terreno", location: "Cazengo, Bairro Marica", beds: "", baths: "", area: "30mx25m",
+            image: "/terreno01.JPG", description: "Terreno com 30 metros de comprimento e 25 metros de largura, já com registo predial e o proprietário se responsabilizará por desafixar o direito a superfície. O terreno está numa zona estratégica com uma ótima margem de crescimento habitacional. OBS: As negociações do preço serão de forma presencial.",
+            images: []
+        },
+        { id: 5, title: "Terreno na Zona Verde", price: "800 000", type: "Venda",
+            category: "Terreno", location: "Cazengo, Zona Verde", beds: "", baths: "", area: "20mx15m",
+            image: "/terreno02.WEBP", description: "Terreno com 20 metros de comprimento e 15 metros de largura, já com registo predial e o proprietário se responsabilizará por desafixar o direito a superfície. O terreno está numa zona estratégica com uma ótima margem de crescimento habitacional. OBS: As negociações do preço serão de forma presencial.",
+            images: []
+        },
+        { id: 6, title: "Terreno na Vieta", price: "600 000", type: "Venda",
+            category: "Terreno", location: "Cazengo, Vieta", beds: "", baths: "", area: "15mx15m",
+            image: "/terreno03.JPG", description: "Terreno com 15 metros de comprimento e 15 metros de largura, já com registo predial e o proprietário se responsabilizará por desafixar o direito a superfície. O terreno está numa zona estratégica com progressão no crescimento habitacional e com zonas comerciais. OBS: As negociações do preço serão de forma presencial.",
+            images: []
         }
     ];
 
@@ -93,8 +111,21 @@ const ExplorePage = () => {
                     <label className='block ml-1 mb-1'>Município</label>
                     <select className="cursor-pointer p-4 rounded-xl border border-gray-200" onChange={(e) => setFilters({...filters, municipio: e.target.value})}>
                         <option>Todos os municípios</option>
-                        <option>Ndalatando</option>
-                        <option>Dondo</option>
+                        <option>Ambaca</option>
+                        <option>Aldeia Nova</option>
+                        <option>Banga</option>
+                        <option>Bolongongo</option>
+                        <option>Cazengo</option>
+                        <option>Cambambe</option>
+                        <option>Cerca</option>
+                        <option>Golungo Alto</option>
+                        <option>Luínga</option>
+                        <option>Lucala</option>
+                        <option>Massangano</option>
+                        <option>Ngonguembo</option>
+                        <option>Samba Cajú</option>
+                        <option>Tango</option>
+                        <option>Terreiro</option>
                     </select>
                 </div>
             
