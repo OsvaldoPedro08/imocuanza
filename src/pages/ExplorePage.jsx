@@ -67,24 +67,37 @@ const ExplorePage = () => {
                 />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                <select className="cursor-pointer p-4 rounded-xl border border-gray-200" onChange={(e) => setFilters({...filters, transacao: e.target.value})}>
-                    <option>Todas (Venda/Arrendamento)</option>
-                    <option>Venda</option>
-                    <option>Arrendamento</option>
-                </select>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className='flex flex-col w-full'>
+                    <label className='block ml-1 mb-1'>Designação</label>
+                    <select className="cursor-pointer p-4 rounded-xl border border-gray-200" onChange={(e) => setFilters({...filters, transacao: e.target.value})}>
+                        <option>Todas (Venda/Arrendamento)</option>
+                        <option>Venda</option>
+                        <option>Arrendamento</option>
+                    </select>
+                </div>
 
-                <select className="cursor-pointer p-4 rounded-xl border border-gray-200" onChange={(e) => setFilters({...filters, tipo: e.target.value})}>
-                    <option>Todos os tipos</option>
-                    <option>Casa</option>
-                    <option>Apartamento</option>
-                </select>
-
-                <select className="cursor-pointer p-4 rounded-xl border border-gray-200" onChange={(e) => setFilters({...filters, municipio: e.target.value})}>
-                    <option>Todos os municípios</option>
-                    <option>Ndalatando</option>
-                    <option>Dondo</option>
-                </select>
+                <div className='flex flex-col w-full'>
+                    <label className='block ml-1 mb-1'>Imóvel</label>
+                    <select className="cursor-pointer p-4 rounded-xl border border-gray-200" onChange={(e) => setFilters({...filters, tipo: e.target.value})}>
+                        <option>Todos os tipos</option>
+                        <option>Casa</option>
+                        <option>Apartamento</option>
+                        <option>Terreno</option>
+                        <option>Espaço Comercial</option>
+                        <option>Armazém</option>
+                    </select>
+                </div>
+                
+                <div className='flex flex-col w-full'>
+                    <label className='block ml-1 mb-1'>Município</label>
+                    <select className="cursor-pointer p-4 rounded-xl border border-gray-200" onChange={(e) => setFilters({...filters, municipio: e.target.value})}>
+                        <option>Todos os municípios</option>
+                        <option>Ndalatando</option>
+                        <option>Dondo</option>
+                    </select>
+                </div>
+            
             </div>
 
         </div>
