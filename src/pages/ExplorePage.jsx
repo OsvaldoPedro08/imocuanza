@@ -87,7 +87,7 @@ const ExplorePage = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className='flex flex-col w-full'>
-                    <label className='block ml-1 mb-1'>Designação</label>
+                    <label className='block ml-1 mb-1'>Tipo de Transação</label>
                     <select className="cursor-pointer p-4 rounded-xl border border-gray-200" onChange={(e) => setFilters({...filters, transacao: e.target.value})}>
                         <option>Todas (Venda/Arrendamento)</option>
                         <option>Venda</option>
@@ -96,7 +96,7 @@ const ExplorePage = () => {
                 </div>
 
                 <div className='flex flex-col w-full'>
-                    <label className='block ml-1 mb-1'>Imóvel</label>
+                    <label className='block ml-1 mb-1'>Tipo de Imóvel</label>
                     <select className="cursor-pointer p-4 rounded-xl border border-gray-200" onChange={(e) => setFilters({...filters, tipo: e.target.value})}>
                         <option>Todos os tipos</option>
                         <option>Casa</option>
