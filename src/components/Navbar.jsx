@@ -9,7 +9,8 @@ const Navbar = () => {
   const menuItems = [
     { name: 'Imóveis', path: '/explore-imoveis' },
     { name: 'Publicar Imóvel', path: '/publicar' },
-    { name: 'Os meus Imóveis', path: '/meus-imoveis' }
+    { name: 'Os meus Imóveis', path: '/meus-imoveis' },
+    { name: 'Perfil', path: '/perfil' }
   ];
 
   // Função auxiliar para verificar se o item está ativo
@@ -40,9 +41,6 @@ const Navbar = () => {
               {item.name}
             </Link>
           ))}
-          <button className="cursor-pointer ml-2 text-emerald-800 px-4 py-2 rounded-lg hover:bg-gray-100 transition">
-            Perfil
-          </button>
         </div>
 
         {/* Menu Mobile */}
