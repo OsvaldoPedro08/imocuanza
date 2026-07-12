@@ -41,7 +41,7 @@ const HeroSection = () => {
           <button onClick={() => navigate('/explore-imoveis')} className="cursor-pointer flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 transition-all px-8 py-4 rounded-xl font-semibold">
             <Search size={20} /> Explorar Imóveis
           </button>
-          <button className="cursor-pointer flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 transition-all px-8 py-4 rounded-xl font-semibold backdrop-blur-sm">
+          <button onClick={() => navigate('/publicar-imovel')} className="cursor-pointer flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 transition-all px-8 py-4 rounded-xl font-semibold backdrop-blur-sm">
             <PlusCircle size={20} /> Publicar Imóvel
           </button>
         </div>

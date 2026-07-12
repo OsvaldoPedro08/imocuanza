@@ -15,32 +15,32 @@ const ExplorePage = () => {
 
     // Dados dos imóveis
     const properties = [
-        { id: 1, title: "Casa T3 com quintal no Bairro Popular", price: "8 500 000", type: "Venda",
+        { id: 1, title: "Casa T3 com quintal no Bairro Popular", price: "8 500 000", typeTrasition: "Venda",
             category: "Casa", location: "Cazengo, Bairro Popular", beds: 3, baths: 2, area: "180m²",
             image: "/id01_00.JPG", description: "Ampla casa de 3 divisões, com sala ampla, cozinha equipada, dois wc e quintal espaçoso. Ideal para famílias. Boa localização, perto de uma esquadra policial e lojas.",
             images : ["/id01_00.JPG", "/id01_01.JPG", "/id01_02.JPG", "/id01_03.JPG"]
         },
-        { id: 2, title: "Casa T3 com quintal, no Bairro Sambizanga", price: "125 000", type: "Arrendamento",
+        { id: 2, title: "Casa T3 com quintal, no Bairro Sambizanga", price: "125 000", typeTrasition: "Arrendamento",
             category: "Casa", location: "Cazengo, Sambizanga", beds: 3, baths: 1, area: "85m²",
             image: "/id02_00.JPG", description: "",
             images: ["/id02_00.JPG", "/id02_01.JPG", "/id02_02.JPG", "/id02_03.JPG"]
         },
-        { id: 3, title: "Apartamento T2 mobilado no centro", price: "120 000", type: "Arrendamento",
+        { id: 3, title: "Apartamento T2 mobilado no centro", price: "120 000", typeTrasition: "Arrendamento",
             category: "Apartamento", location: "Cambambe, Alto Dondo", beds: 2, baths: 1, area: "185m²",
             image: "/id03_00.JPG", description: "",
             images: ["/id03_00.JPG", "/id03_01.WEBP", "/id03_02.WEBP", "/id03_03.WEBP"]
         },
-        { id: 4, title: "Terreno no Bairro Marica", price: "1 500 000", type: "Venda",
+        { id: 4, title: "Terreno no Bairro Marica", price: "1 500 000", typeTrasition: "Venda",
             category: "Terreno", location: "Cazengo, Bairro Marica", beds: "", baths: "", area: "30mx25m",
             image: "/terreno01.JPG", description: "Terreno com 30 metros de comprimento e 25 metros de largura, já com registo predial e o proprietário se responsabilizará por desafixar o direito a superfície. O terreno está numa zona estratégica com uma ótima margem de crescimento habitacional. OBS: As negociações do preço serão de forma presencial.",
             images: []
         },
-        { id: 5, title: "Terreno na Zona Verde", price: "800 000", type: "Venda",
+        { id: 5, title: "Terreno na Zona Verde", price: "800 000", typeTrasition: "Venda",
             category: "Terreno", location: "Cazengo, Zona Verde", beds: "", baths: "", area: "20mx15m",
             image: "/terreno02.WEBP", description: "Terreno com 20 metros de comprimento e 15 metros de largura, já com registo predial e o proprietário se responsabilizará por desafixar o direito a superfície. O terreno está numa zona estratégica com uma ótima margem de crescimento habitacional. OBS: As negociações do preço serão de forma presencial.",
             images: []
         },
-        { id: 6, title: "Terreno na Vieta", price: "600 000", type: "Venda",
+        { id: 6, title: "Terreno na Vieta", price: "600 000", typeTrasition: "Venda",
             category: "Terreno", location: "Cazengo, Vieta", beds: "", baths: "", area: "15mx15m",
             image: "/terreno03.JPG", description: "Terreno com 15 metros de comprimento e 15 metros de largura, já com registo predial e o proprietário se responsabilizará por desafixar o direito a superfície. O terreno está numa zona estratégica com progressão no crescimento habitacional e com zonas comerciais. OBS: As negociações do preço serão de forma presencial.",
             images: []
@@ -51,10 +51,10 @@ const ExplorePage = () => {
     const filteredProperties = useMemo(() => {
         return properties.filter(p => {
         const matchesSearch = p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                p.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                p.typeTrasition.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 p.price.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 p.location.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesTransacao = filters.transacao === "Todas (Venda/Arrendamento)" || p.type === filters.transacao;
+        const matchesTransacao = filters.transacao === "Todas (Venda/Arrendamento)" || p.typeTrasition === filters.transacao;
         const matchesTipo = filters.tipo === "Todos os tipos" || p.category === filters.tipo;
         const matchesMunicipio = filters.municipio === "Todos os municípios" || p.location.includes(filters.municipio);
         
@@ -76,8 +76,7 @@ const ExplorePage = () => {
         <div className="bg-white p-4 md:p-8 rounded-3xl shadow-sm border border-gray-100 mb-10">
             <div className="relative mb-6">
                 <Search className="absolute left-4 top-4 text-gray-400" size={24} />
-                <input 
-                    type="text" 
+                <input  
                     placeholder="Pesquisar por tipo, preço, categoria, localidade..." 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -146,8 +145,8 @@ const ExplorePage = () => {
                       <div className="relative h-56 w-full bg-gray-200">
                         <img src={p.image} alt={p.title} className='w-full h-full object-cover transition-transform duration-500 hover:scale-105' />
                         <div className="absolute top-4 left-4 flex gap-2">
-                            {p.type === 'Venda' ? <span className="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-bold">{p.type}</span>
-                            : <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">{p.type}</span>}
+                            {p.typeTrasition === 'Venda' ? <span className="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-bold">{p.typeTrasition}</span>
+                            : <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">{p.typeTrasition}</span>}
                           <span className="bg-white/90 text-gray-800 px-3 py-1 rounded-full text-xs font-bold">{p.category}</span>
                         </div>
                       </div>

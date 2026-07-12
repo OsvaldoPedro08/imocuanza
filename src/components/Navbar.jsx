@@ -8,7 +8,7 @@ const Navbar = () => {
 
   const menuItems = [
     { name: 'Imóveis', path: '/explore-imoveis' },
-    { name: 'Publicar Imóvel', path: '/publicar' },
+    { name: 'Publicar Imóvel', path: '/publicar-imovel' },
     { name: 'Os meus Imóveis', path: '/meus-imoveis' },
     { name: 'Perfil', path: '/perfil' }
   ];
