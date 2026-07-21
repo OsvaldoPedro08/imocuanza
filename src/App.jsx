@@ -5,6 +5,7 @@ import ViewImovelPage from './components/viewImovel/ViewImovelPage';
 import ProfilePage from './pages/ProfilePage';
 import ViewMyImovelPage from './pages/ViewMyImovelPage';
 import PublishImovelPage from './pages/PublishImovelPage';
+import NotFound from './components/NotFound';
 
 export default function App() {
   return (
@@ -16,6 +17,9 @@ export default function App() {
           <Route path='/publicar-imovel' element={<PublishImovelPage />} />
           <Route path='/meus-imoveis' element={<ViewMyImovelPage />} />
           <Route path='/perfil' element={<ProfilePage />} />
+
+          {/* rota que captura qualquer caminho que nao foi definido acima */}
+          <Route path='*' element={<NotFound />} />
         </Routes>
     </BrowserRouter>
   );

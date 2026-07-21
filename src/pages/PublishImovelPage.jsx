@@ -11,6 +11,8 @@ const PublishImovelPage = () => {
   const [metodoPagamento, setMetodoPagamento] = useState('express');
   const [comprovativo, setComprovativo] = useState(null);
 
+  let valueToPay = 0; //valor que será pago dependendo do tipo de transação
+
   const [formData, setFormData] = useState({
     typeTrasition: 'Venda', category: 'Casa', title: '', description: '', 
     price: '', beds: '', baths: '', area: '', district: '', 
@@ -41,6 +43,19 @@ const PublishImovelPage = () => {
 
     setIsPublished(true); // Ativa a tela de sucesso
   };
+
+  //função que gera o valor de pagamento. Para arrendamento, 5% e para venda 3%
+   const PayValue = (transition, value) => {
+        
+        let price = Number(value);
+
+        //verifica o tipo de transação
+        if(transition === 'Venda') { // 3% => 0.3
+            valueToPay = price * 0.3;
+        } else { // 5% => 0.5
+            valueToPay = price * 0.5;
+        }
+   }
 
   // Se o imóvel já foi publicado, exibe a tela de sucesso da imagem
   if (isPublished) {
@@ -126,7 +141,7 @@ const PublishImovelPage = () => {
                         <div className='mb-4'>
                             <label className='text-gray-400'>Tipo de Transação</label>
                             <select 
-                                className="w-full p-3 border rounded-xl" 
+                                className="cursor-pointer w-full p-3 border rounded-xl mt-2" 
                                 value={formData.typeTrasition} 
                                 onChange={(e) => setFormData({ ...formData, typeTrasition: e.target.value })}
                             >
@@ -138,7 +153,7 @@ const PublishImovelPage = () => {
                         <div className='mb-4'>
                             <label className='text-gray-400'> Tipo de Imóvel</label>
                             <select
-                                className="w-full p-3 border rounded-xl" 
+                                className="cursor-pointer w-full p-3 border rounded-xl mt-2" 
                                 value={formData.category} 
                                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                             >
@@ -153,7 +168,7 @@ const PublishImovelPage = () => {
                         <div className='mb-4'>
                             <label className='text-gray-400'>Título</label>
                             <input 
-                                className="w-full p-3 border rounded-xl" 
+                                className="w-full p-3 border rounded-xl mt-2" 
                                 placeholder="Ex: Casa T3 no Bairro Popular" 
                                 value={formData.title} 
                                 onChange={(e) => setFormData({ ...formData, title: e.target.value })} 
@@ -176,7 +191,7 @@ const PublishImovelPage = () => {
                     <div className='mb-4'>
                         <label className='text-gray-400'>Descrição</label>
                         <textarea
-                            className="w-full p-3 border rounded-xl" 
+                            className="w-full p-3 border rounded-xl mt-2" 
                             placeholder="Descreva o imóvel..." 
                             rows={4}
                             value={formData.description} 
@@ -189,7 +204,7 @@ const PublishImovelPage = () => {
                                 <label className='text-gray-400'>Preço (KZ)*</label>
                                 <input
                                     type="number"
-                                    className="p-3 border rounded-xl" 
+                                    className="p-3 border rounded-xl mt-2" 
                                     placeholder="Preço (Kz)" 
                                     value={formData.price} 
                                     onChange={(e) => setFormData({ ...formData, price: e.target.value })} 
@@ -199,7 +214,7 @@ const PublishImovelPage = () => {
                             <div className='flex flex-col'>
                                 <label className='text-gray-400'>Dimensão</label>
                                 <input 
-                                    className="p-3 border rounded-xl" 
+                                    className="p-3 border rounded-xl mt-2" 
                                     placeholder="Ex: 15mx20m" 
                                     value={formData.area} 
                                     onChange={(e) => setFormData({ ...formData, area: e.target.value })} 
@@ -216,7 +231,7 @@ const PublishImovelPage = () => {
                                         <label className='text-gray-400'>Quartos</label>
                                         <input
                                             type="number" 
-                                            className="p-3 border rounded-xl" 
+                                            className="p-3 border rounded-xl mt-2" 
                                             placeholder="Número de quartos do imóvel" 
                                             value={formData.beds} 
                                             onChange={(e) => setFormData({ ...formData, beds: e.target.value })} 
@@ -227,7 +242,7 @@ const PublishImovelPage = () => {
                                         <label className='text-gray-400'>WC</label>
                                         <input 
                                             type="number"
-                                            className="p-3 border rounded-xl" 
+                                            className="p-3 border rounded-xl mt-2" 
                                             placeholder="Número de WC" 
                                             value={formData.baths} 
                                             onChange={(e) => setFormData({ ...formData, baths: e.target.value })} 
@@ -239,7 +254,7 @@ const PublishImovelPage = () => {
                         <div>
                             <label className='text-gray-400'>Bairro</label>
                             <input 
-                                className="w-full p-3 border rounded-xl" 
+                                className="w-full p-3 border rounded-xl mt-2" 
                                 placeholder="Ex: Cazengo, Bairro Popular" 
                                 value={formData.district} 
                                 onChange={(e) => setFormData({ ...formData, district: e.target.value })} 
@@ -249,7 +264,7 @@ const PublishImovelPage = () => {
                         <div className='mb-4'>
                             <label className='text-gray-400'>Município</label>
                             <select 
-                                className="w-full p-3 border rounded-xl" 
+                                className="cursor-pointer w-full p-3 border rounded-xl mt-2" 
                                 value={formData.municipality} 
                                 onChange={(e) => setFormData({ ...formData, municipality: e.target.value })}
                             >
@@ -274,7 +289,7 @@ const PublishImovelPage = () => {
                         <div className='mb-4'>
                             <label className='text-gray-400'>Telefone</label>
                             <input 
-                                className="w-full p-3 border rounded-xl" 
+                                className="w-full p-3 border rounded-xl mt-2" 
                                 placeholder="+244 9XX XXX XXX" 
                                 value={formData.phone} 
                                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })} 
@@ -283,7 +298,15 @@ const PublishImovelPage = () => {
                     
                     <div className="flex gap-4">
                         <button onClick={() => setStep(1)} className="cursor-pointer flex-1 py-4 bg-gray-100 rounded-xl font-bold">Voltar</button>
-                        <button onClick={() => setStep(3)} className="cursor-pointer flex-1 py-4 bg-black text-white rounded-xl font-bold">Continuar para pagamento</button>
+                        <button 
+                            onClick={() => {
+                                PayValue(formData.typeTrasition, formData.price);
+                                setStep(3);
+                            }} 
+                            className="cursor-pointer flex-1 py-4 bg-black text-white rounded-xl font-bold"
+                        >
+                            Continuar para pagamento
+                        </button>
                     </div>
                     </div>
                 )}
@@ -292,17 +315,17 @@ const PublishImovelPage = () => {
                 {step === 3 && (
                     <div className="space-y-4">
                     <div className="bg-emerald-50 p-6 rounded-2xl text-center border border-emerald-100">
-                        <h4 className="text-emerald-900 font-bold text-xl">1 000 Kz</h4>
+                        <h4 className="text-emerald-900 font-bold text-xl">{valueToPay} kz</h4>
                         <p className="text-sm text-emerald-800">Pagamento único para publicar o seu imóvel</p>
                     </div>
                     
                     <label className="font-bold">Método de pagamento *</label>
-                    <div className="grid grid-cols-2 gap-4">
-                        <button onClick={() => setMetodoPagamento('express')} className={`p-4 border-2 rounded-xl text-left ${metodoPagamento === 'express' ? 'border-emerald-600 bg-emerald-50' : ''}`}>
+                    <div className="grid grid-cols-2 gap-4 mt-2">
+                        <button onClick={() => setMetodoPagamento('express')} className={`cursor-pointer p-4 border-2 rounded-xl text-left ${metodoPagamento === 'express' ? 'border-emerald-600 bg-emerald-50' : ''}`}>
                             <div className="font-bold">Pagamento Express</div>
                             <div className='text-xs text-gray-500'>Multicaixa Express</div>
                         </button>
-                        <button onClick={() => setMetodoPagamento('iban')} className={`p-4 border-2 rounded-xl text-left ${metodoPagamento === 'iban' ? 'border-emerald-600 bg-emerald-50' : ''}`}>
+                        <button onClick={() => setMetodoPagamento('iban')} className={`cursor-pointer p-4 border-2 rounded-xl text-left ${metodoPagamento === 'iban' ? 'border-emerald-600 bg-emerald-50' : ''}`}>
                         <div className="font-bold">Transferência Bancária</div>
                         <div className='text-xs text-gray-500'>IBAN / referência</div>
                         </button>
@@ -313,20 +336,20 @@ const PublishImovelPage = () => {
                             <p><b>Banco:</b> BFA</p>
                             <p><b>IBAN:</b>  AO06 0000 0000 0000 0000 0</p>
                             <p><b>Beneficiário:</b> ImoCuanza, Lda</p>
-                            <p className='mt-2'><b>OBS:</b> Após o pagamento e clicado em "Confirmar e Publicar", os administradores vão analisar seus dados e posteriormente tornar os dados públicos na plataforma.</p>
+                            <p className='mt-2'><b>OBS:</b> Após o pagamento e clicado em "<b>Confirmar e Publicar</b>", os administradores vão analisar seus dados e posteriormente tornar o imóvel público na plataforma.</p>
                         </div>
                     ) : (
                         <div className='bg-gray-50 p-4 rounded-xl text-sm text-gray-600 space-y-1'>
                             <p>Aceda ao <b>Multicaixa Express</b> para o pagamento. Após o pagamento, carregar o comprovativo no campo abaixo</p>
                             <p><b>Numéro do Express:</b> 900 000 000</p>
-                            <p className='mt-2'><b>OBS:</b> Após o pagamento e clicado em "Confirmar e Publicar", os administradores vão analisar seus dados e posteriormente tornar os dados públicos na plataforma.</p>
+                            <p className='mt-2'><b>OBS:</b> Após o pagamento e clicado em "<b>Confirmar e Publicar</b>", os administradores vão analisar seus dados e posteriormente tornar o imóvel público na plataforma.</p>
                         </div>
                     )}
 
                     <div className="mt-4">
                         <label className="block font-bold mb-2">Carregar comprovativo:</label>
                         {comprovativo ? (
-                        <div className="relative w-full h-32">
+                        <div className="relative w-full h-32 mt-2">
                             <img src={comprovativo} className="w-full h-full object-cover rounded-xl border" alt="Comprovativo" />
                             <button onClick={() => setComprovativo(null)} className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1"><X size={14}/></button>
                         </div>
