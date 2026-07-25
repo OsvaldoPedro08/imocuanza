@@ -31,17 +31,17 @@ const ExplorePage = () => {
             images: ["/id03_00.JPG", "/id03_01.WEBP", "/id03_02.WEBP", "/id03_03.WEBP"]
         },
         { id: 4, title: "Terreno no Bairro Marica", price: "1 500 000", typeTrasition: "Venda",
-            category: "Terreno", location: "Cazengo, Bairro Marica", beds: "", baths: "", area: "30mx25m",
+            category: "Terreno", location: "Cazengo, Bairro Marica", beds: 0, baths: 0, area: "30mx25m",
             image: "/terreno01.JPG", description: "Terreno com 30 metros de comprimento e 25 metros de largura, já com registo predial e o proprietário se responsabilizará por desafixar o direito a superfície. O terreno está numa zona estratégica com uma ótima margem de crescimento habitacional. OBS: As negociações do preço serão de forma presencial.",
             images: []
         },
         { id: 5, title: "Terreno na Zona Verde", price: "800 000", typeTrasition: "Venda",
-            category: "Terreno", location: "Cazengo, Zona Verde", beds: "", baths: "", area: "20mx15m",
+            category: "Terreno", location: "Cazengo, Zona Verde", beds: 0, baths: 0, area: "20mx15m",
             image: "/terreno02.WEBP", description: "Terreno com 20 metros de comprimento e 15 metros de largura, já com registo predial e o proprietário se responsabilizará por desafixar o direito a superfície. O terreno está numa zona estratégica com uma ótima margem de crescimento habitacional. OBS: As negociações do preço serão de forma presencial.",
             images: []
         },
         { id: 6, title: "Terreno na Vieta", price: "600 000", typeTrasition: "Venda",
-            category: "Terreno", location: "Cazengo, Vieta", beds: "", baths: "", area: "15mx15m",
+            category: "Terreno", location: "Cazengo, Vieta", beds: 0, baths: 0, area: "15mx15m",
             image: "/terreno03.JPG", description: "Terreno com 15 metros de comprimento e 15 metros de largura, já com registo predial e o proprietário se responsabilizará por desafixar o direito a superfície. O terreno está numa zona estratégica com progressão no crescimento habitacional e com zonas comerciais. OBS: As negociações do preço serão de forma presencial.",
             images: []
         }
@@ -157,8 +157,12 @@ const ExplorePage = () => {
                           <MapPin size={18} /> {p.location}
                         </div>
                         <div className="flex gap-6 text-gray-600 border-t pt-4">
-                          <span className="flex items-center gap-2"><Bed size={20} /> {p.beds} quartos</span>
-                          <span className="flex items-center gap-2"><Bath size={20} /> {p.baths} wc</span>
+                            {p.beds != 0 && p.baths != 0 && (
+                                <div className='flex'>
+                                    <span className="flex items-center px-1"><Bed size={20} /> {p.beds} quartos</span>
+                                    <span className="flex items-center px-1"><Bath size={20} /> {p.baths} wc</span>
+                                </div>
+                            )}
                           <span className="flex items-center gap-2"><Square size={20} /> {p.area} área</span>
                         </div>
                       </div>

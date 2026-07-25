@@ -66,7 +66,7 @@ const ViewImovelPage = () => {
             </div>
 
             <div className='flex gap-2 mb-6 font-bold text-gray-600 pl-2'>
-              {imovel.beds != '' && imovel.baths != '' && (
+              {imovel.beds != 0 && imovel.baths != 0 && (
                 <div className='flex gap-2'>
                   <span>{imovel.beds} quartos</span>
                   <span>{imovel.baths} wc</span>

@@ -6,12 +6,16 @@ import ProfilePage from './pages/ProfilePage';
 import ViewMyImovelPage from './pages/ViewMyImovelPage';
 import PublishImovelPage from './pages/PublishImovelPage';
 import NotFound from './components/NotFound';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 
 export default function App() {
   return (
     <BrowserRouter>
         <Routes>
           <Route path='/' element={<WelcomePage />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/registro' element={<Register />} />
           <Route path='/explore-imoveis' element={<ExplorePage />} />
           <Route path='/explore-imoveis/detalhes-imovel' element={<ViewImovelPage />} />
           <Route path='/publicar-imovel' element={<PublishImovelPage />} />

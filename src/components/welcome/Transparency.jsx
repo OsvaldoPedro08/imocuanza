@@ -1,6 +1,7 @@
 import React from 'react';
 import { CheckCircle, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const points = [
   "Foto e nome verificado do interessado",
@@ -10,6 +11,9 @@ const points = [
 ];
 
 const Transparency = () => {
+  
+  const navigate = useNavigate();
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
@@ -36,7 +40,10 @@ const Transparency = () => {
             ))}
           </ul>
 
-          <button className="flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-xl hover:bg-gray-800 transition">
+          <button 
+            onClick={() => navigate('/login')}
+            className="cursor-pointer flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-xl hover:bg-gray-800 transition"
+          >
             Começar agora <ArrowRight size={20} />
           </button>
         </motion.div>

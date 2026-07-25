@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Edit2, UploadCloud, X, Maximize2 } from 'lucide-react';
 import Navbar from '../components/Navbar'
+import ShowToast from "../utils/ShowToast"
 
 const FileDropzone = ({ label, file, onChange, onRemove }) => (
   <div className="w-full mb-4">
@@ -38,15 +39,22 @@ const ProfilePage = () => {
   const [editData, setEditData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [fullscreenImg, setFullscreenImg] = useState(null);
+  const [toast, setToast] = useState(null);
 
   // Definindo quais campos são obrigatórios para considerar o perfil completo
   const isProfileComplete = 
     user.name && user.phone && user.district && user.municipality && user.typeDoc
     && user.numDoc && user.profileImage && user.documentImages.length > 0;
 
+ // função para editar os dados do usuario 
   const startEditing = () => {
+    
     setEditData({ ...user });
+    
     setIsEditing(true);
+
+    //notif
+    setToast({ message: "Dados atualizados com sucesso!", type: "success" });
   };
 
   const handleFile = (e, field, index = null) => {
@@ -273,6 +281,15 @@ const ProfilePage = () => {
                 <div className="fixed inset-0 bg-black/90 z-[60] flex items-center justify-center p-4" onClick={() => setFullscreenImg(null)}>
                 <img src={fullscreenImg} className="max-h-full max-w-full object-contain" />
                 </div>
+            )}
+
+            {/** renderiza o showtoast */}
+            {toast && (
+                <ShowToast
+                    message={toast.message}
+                    type={toast.type}
+                    onClose={() => setToast(null)}
+                />
             )}
         </main>
     </div>
