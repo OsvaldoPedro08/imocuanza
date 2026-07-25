@@ -15,6 +15,12 @@ const Login = () => {
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [toast, setToast] = useState(null);
 
+  // Restrição estricta para aceitar apenas 9 dígitos numéricos no telefone
+  const handlePhoneChange = (e, setter) => {
+    const value = e.target.value.replace(/\D/g, '').slice(0, 9);
+    setter(value);
+  };
+
   // Submeter Login
   const handleLoginSubmit = (e) => {
     
